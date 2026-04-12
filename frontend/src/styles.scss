@@ -1,0 +1,52 @@
+@use 'bootstrap/scss/bootstrap';
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    min-height: 90dvh;
+    background-color: #EBF5F8;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.title,
+.sub-title {
+    color: #656263;
+}
+
+.form-label {
+    color: #656263;
+}
+
+.submit-button {
+    border: none;
+    border-radius: 999px;
+    background-color: #F05026;
+    color: #fff;
+    font-weight: 700;
+    transition: background-color 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+
+.submit-button:hover {
+    background-color: #F05026;
+    color: #fff !important;
+    filter: saturate(0.82) brightness(0.96);
+}
+
+.submit-button:focus,
+.submit-button:active {
+    background-color: #F05026 !important;
+    color: #fff !important;
+    box-shadow: none;
+}
+
+.form-select:hover,
+.form-control:hover {
+    border-color: #F05026;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: #F05026;
+    box-shadow: 0 0 0 0.2rem rgba(240, 80, 38, 0.18);
+}

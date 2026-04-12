@@ -1,0 +1,68 @@
+<main>
+  <div class="container">
+    <h1 class="title mt-3">
+      Waterjade - Full Stack Developer Assignment
+    </h1>
+    <h2 class="sub-title mt-2">
+      <i>Analisi Precipitazioni - Alessandro Costa</i>
+    </h2>
+
+    <div class="row mt-4 align-items-start">
+      <div class="col-12 col-lg-5">
+        <!-- form bs5 - inizio -->
+        <form (ngSubmit)="onSubmit()">
+          <label for="form-select" class="form-label mt-3">Seleziona Stazione</label>
+          <select 
+            class="form-select" 
+            aria-label="Default"
+            name="stationId"
+            [(ngModel)]="selectedStation"
+            [disabled]="isLoadingStations"
+            required
+          >
+            <option value="">
+              {{ isLoadingStations ? 'Caricamento stazioni...' : 'Seleziona stazione' }}
+            </option>
+            <option *ngFor="let station of stations" [value]="station.id">
+              {{ station.name }}
+            </option>
+          </select>
+
+          <label for="start-date" class="form-label mt-3">Seleziona Data Inizio</label>
+          <input
+            id="start-date"
+            type="datetime-local"
+            class="form-control"
+            name="startDate"
+            [(ngModel)]="startDate"
+            required
+          />
+
+          <label for="end-date" class="form-label mt-3">Seleziona Data Fine</label>
+          <input
+            id="end-date"
+            type="datetime-local"
+            class="form-control"
+            name="endDate"
+            [(ngModel)]="endDate"
+            required
+          />
+
+          <button type="submit" class="btn submit-button mt-3">
+            Costruisci Grafico <i class="bi bi-arrow-right"></i>
+          </button>
+        </form>
+        <!-- form bs5 - fine -->
+      </div>
+
+      <div class="col-12 col-lg-7 mt-2">
+        <!-- chart.js -->
+        <div style="height: 400px;">
+        <canvas #chartCanvas></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<router-outlet></router-outlet>
