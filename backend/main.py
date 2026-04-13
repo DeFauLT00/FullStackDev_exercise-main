@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 STATIONS_METADATA_FILE = DATA_DIR / "stations_metadata.csv"
 
-
+"""backend: “accetta richieste dal frontend"""
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:4200", "http://localhost:8080"],
@@ -21,9 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+"""Parsa una data ISO sia con minuti che con secondi."""
 def parse_iso_datetime(value: str) -> datetime:
-    """Parsa una data ISO sia con minuti che con secondi."""
     try:
         return datetime.fromisoformat(value)
     except ValueError as exc:
@@ -32,7 +31,7 @@ def parse_iso_datetime(value: str) -> datetime:
             detail=f"Invalid datetime format: {value}",
         ) from exc
 
-
+"""Legge i dati dal CSV delle info sulle stazioni"""
 def read_stations_metadata() -> list[dict]:
     stations: list[dict] = []
 
@@ -63,7 +62,7 @@ def get_station_file_path(station_id: int) -> Path:
 
     return file_path
 
-
+"""Funzione utile per valorizzare la var. rows con i dati meteo delle stazioni"""
 def read_station_data(station_id: int) -> list[dict]:
     rows: list[dict] = []
     file_path = get_station_file_path(station_id)
@@ -75,7 +74,7 @@ def read_station_data(station_id: int) -> list[dict]:
 
     return rows
 
-
+"""Usa la funzione per il parsing delle date ed in base a quelle selezionate filtra rows"""
 def filter_data_by_date(rows: list[dict], start_date: str, end_date: str) -> list[dict]:
     start = parse_iso_datetime(start_date)
     end = parse_iso_datetime(end_date)
@@ -95,7 +94,7 @@ def filter_data_by_date(rows: list[dict], start_date: str, end_date: str) -> lis
 
     return filtered_rows
 
-
+"""Crea la lista contenente la somma progressiva in base alle precipitazione cumulata"""
 def compute_cumulative_precipitation(rows: list[dict]) -> list[dict]:
     """
         - NaN o valori non numerici vengono trattati come 0.0
