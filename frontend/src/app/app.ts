@@ -123,7 +123,12 @@ export class App implements OnInit, AfterViewInit {
         datasets: [
           {
             label: 'Precipitazioni Cumulative',
-            data: []
+            data: [],
+            borderColor: '#36A2EB',
+            pointBackgroundColor: '#F05026',
+            pointBorderColor: '#F05026',
+            pointHoverBackgroundColor: '#F05026',
+            pointHoverBorderColor: '#F05026'
           }
         ]
       },
